@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_register.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_api_test.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_api_test.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_otp_verification.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_otp_verification.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_login.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_location_selection.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_location_selection.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_license_verification.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_license_verification.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_deposit.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_deposit.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/drawable_helmet_logo.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/drawable/helmet_logo.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_main.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_item_helmet.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/item_helmet.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_item_location.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/item_location.xml"
+    },
+    {
+        "merged": "com.urbana.helmetrental.app-merged_res-31:/layout_activity_dashboard.xml.flat",
+        "source": "com.urbana.helmetrental.app-main-33:/layout/activity_dashboard.xml"
+    }
+]

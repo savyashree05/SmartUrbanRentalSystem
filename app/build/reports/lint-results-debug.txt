@@ -1,0 +1,439 @@
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\AndroidManifest.xml:6: Warning: READ_EXTERNAL_STORAGE is deprecated (and is not granted) when targeting Android 13+. If you need to query or interact with MediaStore or media files on the shared storage, you should instead use one or more new storage permissions: READ_MEDIA_IMAGES, READ_MEDIA_VIDEO or READ_MEDIA_AUDIO. [ScopedStorage]
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\AndroidManifest.xml:7: Warning: WRITE_EXTERNAL_STORAGE is deprecated (and is not granted) when targeting Android 13+. If you need to write to shared storage, use the MediaStore.createWriteRequest intent. [ScopedStorage]
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ScopedStorage":
+   Scoped storage is enforced on Android 10+ (or Android 11+ if using
+   requestLegacyExternalStorage). In particular, WRITE_EXTERNAL_STORAGE will
+   no longer provide write access to all files; it will provide the equivalent
+   of READ_EXTERNAL_STORAGE instead.
+
+   As of Android 13, if you need to query or interact with MediaStore or media
+   files on the shared storage, you should be using instead one or more new
+   storage permissions:
+   * android.permission.READ_MEDIA_IMAGES
+   * android.permission.READ_MEDIA_VIDEO
+   * android.permission.READ_MEDIA_AUDIO
+
+   and then add maxSdkVersion="33" to the older permission. See the developer
+   guide for how to do this:
+   https://developer.android.com/about/versions/13/behavior-changes-13#granula
+   r-media-permissions
+
+   The MANAGE_EXTERNAL_STORAGE permission can be used to manage all files, but
+   it is rarely necessary and most apps on Google Play are not allowed to use
+   it. Most apps should instead migrate to use scoped storage. To modify or
+   delete files, apps should request write access from the user as described
+   at https://goo.gle/android-mediastore-createwriterequest.
+
+   To learn more, read these resources: Play policy:
+   https://goo.gle/policy-storage-help Allowable use cases:
+   https://goo.gle/policy-storage-usecases
+
+   https://goo.gle/android-storage-usecases
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DepositActivity.java:60: Warning: Implicitly using the default locale is a common source of bugs: Use String.format(Locale, ...) instead [DefaultLocale]
+        tvDepositAmount.setText("₹" + String.format("%.2f", DEPOSIT_AMOUNT));
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "DefaultLocale":
+   Calling String#toLowerCase() or #toUpperCase() without specifying an
+   explicit locale is a common source of bugs. The reason for that is that
+   those methods will use the current locale on the user's device, and even
+   though the code appears to work correctly when you are developing the app,
+   it will fail in some locales. For example, in the Turkish locale, the
+   uppercase replacement for i is not I.
+
+   If you want the methods to just perform ASCII replacement, for example to
+   convert an enum name, call String#toUpperCase(Locale.US) instead. If you
+   really want to use the current locale, call
+   String#toUpperCase(Locale.getDefault()) instead.
+
+   https://developer.android.com/reference/java/util/Locale.html#default_locale
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\build.gradle:13: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk 34
+        ~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application runs on a version of Android that is more recent than
+   your targetSdkVersion specifies that it has been tested with, various
+   compatibility modes kick in. This ensures that your application continues
+   to work, but it may look out of place. For example, if the targetSdkVersion
+   is less than 14, your app may get an option button in the UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\LicenseVerificationActivity.java:63: Warning: Consider adding a <queries> declaration to your manifest when calling this method; see https://g.co/dev/packagevisibility for details [QueryPermissionsNeeded]
+                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                                      ~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "QueryPermissionsNeeded":
+   Apps that target Android 11 cannot query or interact with other installed
+   apps by default. If you need to query or interact with other installed
+   apps, you may need to add a <queries> declaration in your manifest.
+
+   As a corollary, the methods PackageManager#getInstalledPackages and
+   PackageManager#getInstalledApplications will no longer return information
+   about all installed apps. To query specific apps or types of apps, you can
+   use methods like PackageManager#getPackageInfo or
+   PackageManager#queryIntentActivities.
+
+   https://g.co/dev/packagevisibility
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\build.gradle:26: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.0 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\build.gradle:27: Warning: A newer version of com.google.android.material:material than 1.9.0 is available: 1.12.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.9.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\build.gradle:28: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1 [GradleDependency]
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\build.gradle:33: Warning: A newer version of com.google.android.material:material than 1.11.0 is available: 1.12.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.11.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DashboardActivity.java:72: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+                    helmetAdapter.notifyDataSetChanged();
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\util\FileUtil.java:29: Warning: This InputStream should be freed up after use with #close() [Recycle]
+        InputStream inputStream = context.getContentResolver().openInputStream(uri);
+                                                               ~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Recycle":
+   Many resources, such as TypedArrays, VelocityTrackers, etc., should be
+   recycled (with a recycle() call) after use. This lint check looks for
+   missing recycle() calls.
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\values\colors.xml:4: Warning: The resource R.color.primary appears to be unused [UnusedResources]
+    <color name="primary">#6200EE</color>
+           ~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\values\colors.xml:7: Warning: The resource R.color.primary_variant appears to be unused [UnusedResources]
+    <color name="primary_variant">#3700B3</color>
+           ~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\values\colors.xml:10: Warning: The resource R.color.colorOnPrimary appears to be unused [UnusedResources]
+    <color name="colorOnPrimary">#FFFFFF</color>
+           ~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\values\colors.xml:13: Warning: The resource R.color.secondary appears to be unused [UnusedResources]
+    <color name="secondary">#03DAC6</color>
+           ~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\values\colors.xml:16: Warning: The resource R.color.secondary_variant appears to be unused [UnusedResources]
+    <color name="secondary_variant">#018786</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\values\colors.xml:19: Warning: The resource R.color.colorOnSecondary appears to be unused [UnusedResources]
+    <color name="colorOnSecondary">#000000</color>
+           ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:35: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:49: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_login.xml:32: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_otp_verification.xml:32: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_register.xml:32: Warning: Missing autofillHints attribute [Autofill]
+    <EditText
+     ~~~~~~~~
+
+   Explanation for issues of type "Autofill":
+   Specify an autofillHints attribute when targeting SDK version 26 or higher
+   or explicitly specify that the view is not important for autofill. Your app
+   can help an autofill service classify the data correctly by providing the
+   meaning of each view that could be autofillable, such as views representing
+   usernames, passwords, credit card fields, email addresses, etc.
+
+   The hints can have any value, but it is recommended to use predefined
+   values like 'username' for a username or 'creditCardNumber' for a credit
+   card number. For a list of all predefined autofill hint constants, see the
+   AUTOFILL_HINT_ constants in the View reference at
+   https://developer.android.com/reference/android/view/View.html.
+
+   You can mark a view unimportant for autofill by specifying an
+   importantForAutofill attribute on that view or a parent view. See
+   https://developer.android.com/reference/android/view/View.html#setImportant
+   ForAutofill(int).
+
+   https://developer.android.com/guide/topics/text/autofill.html
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_license_verification.xml:32: Warning: Missing contentDescription attribute on image [ContentDescription]
+    <ImageView
+     ~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_main.xml:9: Warning: Missing contentDescription attribute on image [ContentDescription]
+    <ImageView
+     ~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\Debug\ApiTestActivity.java:43: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        etApiUrl.setText("http://10.0.2.2:8080/");
+                         ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\Debug\ApiTestActivity.java:68: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        tvResult.setText("Testing API connection...");
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DashboardActivity.java:45: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        tvWelcome.setText("Welcome, User #" + sessionManager.getUserId());
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DashboardActivity.java:45: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        tvWelcome.setText("Welcome, User #" + sessionManager.getUserId());
+                          ~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DashboardActivity.java:48: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        tvLocation.setText("Location: " + sessionManager.getSelectedLocationName());
+                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DashboardActivity.java:48: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        tvLocation.setText("Location: " + sessionManager.getSelectedLocationName());
+                           ~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\DepositActivity.java:60: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        tvDepositAmount.setText("₹" + String.format("%.2f", DEPOSIT_AMOUNT));
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\adapter\HelmetAdapter.java:39: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        holder.tvHelmetCode.setText("Helmet #" + helmet.getCode());
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\adapter\HelmetAdapter.java:39: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        holder.tvHelmetCode.setText("Helmet #" + helmet.getCode());
+                                    ~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\OtpVerificationActivity.java:50: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        tvPhoneNumber.setText("Enter the OTP sent to " + phoneNumber);
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\java\com\urbana\helmetrental\OtpVerificationActivity.java:50: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        tvPhoneNumber.setText("Enter the OTP sent to " + phoneNumber);
+                              ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:14: Warning: Hardcoded string "API Connection Test", should use @string resource [HardcodedText]
+        android:text="API Connection Test"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:28: Warning: Hardcoded string "Use this tool to test your API connection", should use @string resource [HardcodedText]
+        android:text="Use this tool to test your API connection"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:42: Warning: Hardcoded string "API Base URL (e.g., http://10.0.2.2:8080/)", should use @string resource [HardcodedText]
+        android:hint="API Base URL (e.g., http://10.0.2.2:8080/)"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:56: Warning: Hardcoded string "Phone Number", should use @string resource [HardcodedText]
+        android:hint="Phone Number"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:70: Warning: Hardcoded string "Test API Connection", should use @string resource [HardcodedText]
+        android:text="Test API Connection"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:81: Warning: Hardcoded string "Test Results:", should use @string resource [HardcodedText]
+        android:text="Test Results:"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_api_test.xml:105: Warning: Hardcoded string "Results will appear here", should use @string resource [HardcodedText]
+            android:text="Results will appear here"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_dashboard.xml:14: Warning: Hardcoded string "Welcome, User", should use @string resource [HardcodedText]
+        android:text="Welcome, User"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_dashboard.xml:26: Warning: Hardcoded string "Location: Downtown", should use @string resource [HardcodedText]
+        android:text="Location: Downtown"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_dashboard.xml:38: Warning: Hardcoded string "Available Helmets", should use @string resource [HardcodedText]
+        android:text="Available Helmets"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:14: Warning: Hardcoded string "Security Deposit", should use @string resource [HardcodedText]
+        android:text="Security Deposit"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:28: Warning: Hardcoded string "A refundable security deposit is required to use our helmet rental service. This amount will be refunded when you return the helmet.", should use @string resource [HardcodedText]
+        android:text="A refundable security deposit is required to use our helmet rental service. This amount will be refunded when you return the helmet."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:57: Warning: Hardcoded string "Deposit Amount:", should use @string resource [HardcodedText]
+                android:text="Deposit Amount:"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:67: Warning: Hardcoded string "₹1000.00", should use @string resource [HardcodedText]
+                android:text="₹1000.00"
+                ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:79: Warning: Hardcoded string "Select Payment Method:", should use @string resource [HardcodedText]
+                android:text="Select Payment Method:"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:98: Warning: Hardcoded string "UPI (Google Pay, PhonePe, etc.)", should use @string resource [HardcodedText]
+                    android:text="UPI (Google Pay, PhonePe, etc.)" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:105: Warning: Hardcoded string "Credit/Debit Card", should use @string resource [HardcodedText]
+                    android:text="Credit/Debit Card" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:112: Warning: Hardcoded string "Net Banking", should use @string resource [HardcodedText]
+                    android:text="Net Banking" />
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:124: Warning: Hardcoded string "Note: This is a one-time deposit that will be refunded to your wallet when you return the helmet.", should use @string resource [HardcodedText]
+        android:text="Note: This is a one-time deposit that will be refunded to your wallet when you return the helmet."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_deposit.xml:139: Warning: Hardcoded string "Pay Deposit", should use @string resource [HardcodedText]
+        android:text="Pay Deposit"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_license_verification.xml:14: Warning: Hardcoded string "License Verification", should use @string resource [HardcodedText]
+        android:text="License Verification"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_license_verification.xml:26: Warning: Hardcoded string "Upload your driving license for verification", should use @string resource [HardcodedText]
+        android:text="Upload your driving license for verification"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_license_verification.xml:53: Warning: Hardcoded string "Take Photo", should use @string resource [HardcodedText]
+        android:text="Take Photo"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_license_verification.xml:65: Warning: Hardcoded string "Choose File", should use @string resource [HardcodedText]
+        android:text="Choose File"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_license_verification.xml:79: Warning: Hardcoded string "Verify License", should use @string resource [HardcodedText]
+        android:text="Verify License"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_location_selection.xml:14: Warning: Hardcoded string "Select Location", should use @string resource [HardcodedText]
+        android:text="Select Location"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_location_selection.xml:26: Warning: Hardcoded string "Choose a location to rent a helmet", should use @string resource [HardcodedText]
+        android:text="Choose a location to rent a helmet"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_location_selection.xml:53: Warning: Hardcoded string "Continue", should use @string resource [HardcodedText]
+        android:text="Continue"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_login.xml:14: Warning: Hardcoded string "Login", should use @string resource [HardcodedText]
+        android:text="Login"
+        ~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_login.xml:26: Warning: Hardcoded string "Enter your phone number to login", should use @string resource [HardcodedText]
+        android:text="Enter your phone number to login"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_login.xml:39: Warning: Hardcoded string "Phone Number", should use @string resource [HardcodedText]
+        android:hint="Phone Number"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_login.xml:53: Warning: Hardcoded string "Send OTP", should use @string resource [HardcodedText]
+        android:text="Send OTP"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_main.xml:24: Warning: Hardcoded string "Smart Urbana Helmet Rental", should use @string resource [HardcodedText]
+        android:text="Smart Urbana Helmet Rental"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_main.xml:36: Warning: Hardcoded string "Safe. Smart. Sustainable.", should use @string resource [HardcodedText]
+        android:text="Safe. Smart. Sustainable."
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_main.xml:49: Warning: Hardcoded string "Login", should use @string resource [HardcodedText]
+        android:text="Login"
+        ~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_main.xml:61: Warning: Hardcoded string "Register", should use @string resource [HardcodedText]
+        android:text="Register"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_otp_verification.xml:14: Warning: Hardcoded string "OTP Verification", should use @string resource [HardcodedText]
+        android:text="OTP Verification"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_otp_verification.xml:26: Warning: Hardcoded string "Enter the OTP sent to your phone", should use @string resource [HardcodedText]
+        android:text="Enter the OTP sent to your phone"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_otp_verification.xml:39: Warning: Hardcoded string "Enter OTP", should use @string resource [HardcodedText]
+        android:hint="Enter OTP"
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_otp_verification.xml:54: Warning: Hardcoded string "Verify OTP", should use @string resource [HardcodedText]
+        android:text="Verify OTP"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_register.xml:14: Warning: Hardcoded string "Register", should use @string resource [HardcodedText]
+        android:text="Register"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_register.xml:26: Warning: Hardcoded string "Enter your phone number to register", should use @string resource [HardcodedText]
+        android:text="Enter your phone number to register"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_register.xml:39: Warning: Hardcoded string "Phone Number", should use @string resource [HardcodedText]
+        android:hint="Phone Number"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\activity_register.xml:53: Warning: Hardcoded string "Send OTP", should use @string resource [HardcodedText]
+        android:text="Send OTP"
+        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\item_helmet.xml:19: Warning: Hardcoded string "Helmet #123", should use @string resource [HardcodedText]
+            android:text="Helmet #123"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\item_helmet.xml:31: Warning: Hardcoded string "Available", should use @string resource [HardcodedText]
+            android:text="Available"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\item_helmet.xml:42: Warning: Hardcoded string "Rent", should use @string resource [HardcodedText]
+            android:text="Rent"
+            ~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\item_location.xml:22: Warning: Hardcoded string "Location Name", should use @string resource [HardcodedText]
+        android:text="Location Name"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Savyashree\AndroidStudioProjects\SmartHelmetRental\app\src\main\res\layout\item_location.xml:35: Warning: Hardcoded string "Location Address", should use @string resource [HardcodedText]
+        android:text="Location Address"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+0 errors, 84 warnings

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary color -->
+    <color name="primary">#6200EE</color>
+
+    <!-- Primary variant color -->
+    <color name="primary_variant">#3700B3</color>
+
+    <!-- Color for text/icons on primary color -->
+    <color name="colorOnPrimary">#FFFFFF</color>
+
+    <!-- Secondary color -->
+    <color name="secondary">#03DAC6</color>
+
+    <!-- Secondary variant color -->
+    <color name="secondary_variant">#018786</color>
+
+    <!-- Color for text/icons on secondary color -->
+    <color name="colorOnSecondary">#000000</color>
+
+        <color name="purple_500">#6200EE</color>
+        <color name="purple_700">#3700B3</color>
+        <color name="teal_200">#03DAC5</color>
+        <color name="white">#FFFFFF</color>
+        <color name="black">#000000</color>
+
+
+</resources>
